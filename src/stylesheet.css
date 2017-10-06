@@ -1,0 +1,7 @@
+.funky_button {
+    -fx-text-fill: white;
+    -fx-font-size: 10;
+    -fx-font-family: "Arial Black";
+    -fx-padding: 5;
+    -fx-background-color: black;
+}
