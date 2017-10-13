@@ -57,18 +57,18 @@ public class main extends Application {
         root.getChildren().add(myMenu);
 
         ObservableList<items> Item = FXCollections.observableArrayList(
-                new items("11", "1", "1", "20"),
-                new items("ls Tee", "Long Sleeve TShirt", "1", "25"),
-                new items("Coat", "Black Coat", "1", "100"),
-                new items("Hoodie", "Black Hoodie", "1", "70"),
-                new items("Trousers", "Black Trousers", "1", "50")
+                new items("SS Tee", "Short Sleeve TShirt", "1", "20", "20"),
+                new items("LS Tee", "Long Sleeve TShirt", "1", "25", "25"),
+                new items("Coat", "Black Coat", "1", "100", "100"),
+                new items("Hoodie", "Black Hoodie", "1", "70", "70"),
+                new items("Trousers", "Black Trousers", "1", "50", "50")
         );
 
         TableView table = new TableView<>();
-        table.setPrefSize(500, 350);
+        table.setPrefSize(500, 200);
         table.setItems(Item);
         table.setLayoutX(55);
-        table.setLayoutY(30);
+        table.setLayoutY(100);
 
 
 
@@ -89,7 +89,11 @@ public class main extends Application {
         unitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         //table.getColumns().add(unitPriceColumn);
 
-        table.getColumns().addAll(itemNameColumn,itemDescColumn,QuantityColumn,unitPriceColumn);
+        TableColumn totalPriceColumn = new TableColumn<>("Total Price");
+        totalPriceColumn.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
+        //table.getColumns().add(totalPriceColumn);
+
+        table.getColumns().addAll(itemNameColumn,itemDescColumn,QuantityColumn,unitPriceColumn, totalPriceColumn);
 
         root.getChildren().add(table);
     }
