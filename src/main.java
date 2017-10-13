@@ -1,10 +1,16 @@
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+
 
 
 public class main extends Application {
@@ -50,6 +56,42 @@ public class main extends Application {
         myMenu.getMenus().addAll(fileMenu, editMenu, helpMenu);
         root.getChildren().add(myMenu);
 
+        ObservableList<items> Item = FXCollections.observableArrayList(
+                new items("11", "1", "1", "20"),
+                new items("ls Tee", "Long Sleeve TShirt", "1", "25"),
+                new items("Coat", "Black Coat", "1", "100"),
+                new items("Hoodie", "Black Hoodie", "1", "70"),
+                new items("Trousers", "Black Trousers", "1", "50")
+        );
+
+        TableView table = new TableView<>();
+        table.setPrefSize(500, 350);
+        table.setItems(Item);
+        table.setLayoutX(55);
+        table.setLayoutY(30);
+
+
+
+
+        TableColumn itemNameColumn = new TableColumn<>("Item Name");
+        itemNameColumn.setCellValueFactory(new PropertyValueFactory<>("itemName"));
+        //table.getColumns().add(itemNameColumn);
+
+        TableColumn itemDescColumn = new TableColumn<>("Item Description");
+        itemDescColumn.setCellValueFactory(new PropertyValueFactory<>("itemDesc"));
+        //table.getColumns().add(itemDescColumn);
+
+        TableColumn QuantityColumn = new TableColumn<>("Quantity");
+        QuantityColumn.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
+        //table.getColumns().add(QuantityColumn);
+
+        TableColumn unitPriceColumn = new TableColumn<>("Unit Price");
+        unitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+        //table.getColumns().add(unitPriceColumn);
+
+        table.getColumns().addAll(itemNameColumn,itemDescColumn,QuantityColumn,unitPriceColumn);
+
+        root.getChildren().add(table);
     }
     public static void openStageOne(Pane pane) {
         StageOne newStageOne = new StageOne(pane);
