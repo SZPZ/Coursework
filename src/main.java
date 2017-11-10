@@ -1,3 +1,6 @@
+import Model.DatabaseConnection;
+import Model.ITEMS;
+import Model.ITEMSService;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,13 +14,15 @@ import javafx.stage.Stage;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
+import java.util.ArrayList;
 
 
 public class main extends Application {
-
+    public static DatabaseConnection database;
     @Override
     public void start(Stage stage) throws Exception {
 
+        database = new DatabaseConnection("Coursework.db");
         Pane root = new Pane();
 
         Scene scene = new Scene(root, 600, 400);
@@ -25,7 +30,6 @@ public class main extends Application {
         stage.setTitle("Stock Control");
         stage.setScene(scene);
         stage.show();
-
 
 
         VBox rooted = new VBox();
@@ -71,8 +75,6 @@ public class main extends Application {
         table.setLayoutY(100);
 
 
-
-
         TableColumn itemNameColumn = new TableColumn<>("Item Name");
         itemNameColumn.setCellValueFactory(new PropertyValueFactory<>("itemName"));
         //table.getColumns().add(itemNameColumn);
@@ -93,10 +95,17 @@ public class main extends Application {
         totalPriceColumn.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
         //table.getColumns().add(totalPriceColumn);
 
-        table.getColumns().addAll(itemNameColumn,itemDescColumn,QuantityColumn,unitPriceColumn, totalPriceColumn);
+        table.getColumns().addAll(itemNameColumn, itemDescColumn, QuantityColumn, unitPriceColumn, totalPriceColumn);
 
         root.getChildren().add(table);
+
+        ArrayList<ITEMS> testList = new ArrayList<>();
+        ITEMSService.selectAll(testList, database);
+        for (ITEMS c : testList) {
+            System.out.println(c);
+        }
     }
+
     public static void openStageOne(Pane pane) {
         StageOne newStageOne = new StageOne(pane);
     }
