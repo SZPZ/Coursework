@@ -27,7 +27,7 @@ public class ITEMSService {
     }
     public static ITEMS selectByID(int id, DatabaseConnection database) {
         ITEMS result = null;
-        PreparedStatement statement = database.newStatement("SELECT x, y, z, FROM Table WHERE id = ?");
+        PreparedStatement statement = database.newStatement("SELECT ID, ItemName, ItemDesc, Quantity, UnitPrice, TotalPrice FROM ITEMS WHERE id = ?");
 
         try {
             if (statement != null) {
@@ -67,7 +67,7 @@ public class ITEMSService {
 
         try {
             if (existingItem == null) {
-                PreparedStatement statement = database.newStatement("INSERT INTO Table (id, itemName, itemDesc, quantity, price, totalPrice) VALUES (?, ?, ?, ?, ?, ?))");
+                PreparedStatement statement = database.newStatement("INSERT INTO ITEMS (id, itemName, itemDesc, quantity, price, totalPrice) VALUES (?, ?, ?, ?, ?, ?))");
                 statement.setInt(1, itemToSave.getId());
                 statement.setString(2, itemToSave.getItemName());
                 statement.setString(3, itemToSave.getItemDesc());
@@ -77,7 +77,7 @@ public class ITEMSService {
                 database.executeUpdate(statement);
             }
             else {
-                PreparedStatement statement = database.newStatement("UPDATE Table SET id = ?, itemName = ?, itemDesc = ?, quantity = ?, price = ?, totalPrice = ?,  WHERE id = ?");
+                PreparedStatement statement = database.newStatement("UPDATE ITEMS SET id = ?, itemName = ?, itemDesc = ?, quantity = ?, price = ?, totalPrice = ?,  WHERE id = ?");
                 statement.setInt(1, itemToSave.getId());
                 statement.setString(2, itemToSave.getItemName());
                 statement.setString(3, itemToSave.getItemDesc());
