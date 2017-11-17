@@ -64,4 +64,16 @@ public class ITEMS {
     public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
     }
+
+    @Override
+    public String toString() {
+        return "ITEMS{" +
+                "id=" + id +
+                ", itemName='" + itemName + '\'' +
+                ", itemDesc='" + itemDesc + '\'' +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
 }

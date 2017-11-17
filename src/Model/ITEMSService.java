@@ -8,7 +8,7 @@ import java.util.List;
 public class ITEMSService {
     public static void selectAll(List<ITEMS> targetList, DatabaseConnection database) {
 
-        PreparedStatement statement = database.newStatement("SELECT x, y, z FROM Table ORDER BY x");
+        PreparedStatement statement = database.newStatement("SELECT ID, ItemName, ItemDesc, Quantity, UnitPrice, TotalPrice FROM ITEMS");
 
         try {
             if (statement != null) {
@@ -63,7 +63,7 @@ public class ITEMSService {
     public static void save(ITEMS itemToSave, DatabaseConnection database) {
 
         ITEMS existingItem = null;
-        if (itemToSave.getId() != 0) existingItem = selectById(itemToSave.getId(), database);
+        if (itemToSave.getId() != 0) existingItem = selectByID(itemToSave.getId(), database);
 
         try {
             if (existingItem == null) {
