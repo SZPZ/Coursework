@@ -1,10 +1,14 @@
 import Model.DatabaseConnection;
 import Model.ITEMS;
 import Model.ITEMSService;
+import Model.ITEMSView;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -58,21 +62,45 @@ public class main extends Application {
 
 
 
-        TableView table = new TableView<>();
+        TableView<ITEMSView> table = new TableView<>();
         table.setPrefSize(500, 200);
         table.setLayoutX(55);
         table.setLayoutY(100);
+
+        ArrayList<ITEMS> itemsList = new ArrayList<>();
+        ITEMSService.selectAll(itemsList, database);
+
+        ArrayList<ITEMSView> itemsViewList = new ArrayList<>();
+        for (ITEMS i : itemsList) {
+            itemsViewList.add(new ITEMSView(i));
+        }
+
+        ObservableList<ITEMSView> observableList = FXCollections.observableArrayList(itemsViewList);
+
+        table.setItems(observableList);
+
+        TableColumn<ITEMSView, String> column1 = new TableColumn<>("Name");
+        column1.setCellValueFactory(new PropertyValueFactory<>("itemName"));
+        table.getColumns().add(column1);
+
+        TableColumn<ITEMSView, String> column2 = new TableColumn<>("Description");
+        column2.setCellValueFactory(new PropertyValueFactory<>("itemDesc"));
+        table.getColumns().add(column2);
+
+        TableColumn<ITEMSView, Integer> column3 = new TableColumn<>("Quantity");
+        column3.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        table.getColumns().add(column3);
+
+        TableColumn<ITEMSView, Integer> column4 = new TableColumn<>("Price");
+        column4.setCellValueFactory(new PropertyValueFactory<>("price"));
+        table.getColumns().add(column4);
+
+        TableColumn<ITEMSView, Integer> column5 = new TableColumn<>("Total");
+        column5.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
+        table.getColumns().add(column5);
+
         root.getChildren().add(table);
 
-
-
-
-
-        ArrayList<ITEMS> testList = new ArrayList<>();
-        ITEMSService.selectAll(testList, database);
-        for (ITEMS c : testList) {
-            System.out.println(c);
-        }
     }
 
     public static void openStageOne(Pane pane) {
