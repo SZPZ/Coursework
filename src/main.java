@@ -37,7 +37,7 @@ public class main extends Application {
 
         //Menu fileMenu = new Menu("File");
         //MenuItem fileItem1 = new MenuItem("New");
-       // MenuItem fileItem2 = new MenuItem("Open");
+        //MenuItem fileItem2 = new MenuItem("Open");
         //MenuItem fileItem3 = new MenuItem("Save");
         //fileMenu.getItems().addAll(fileItem1, fileItem2, fileItem3);
         //fileItem3.setOnAction(((ActionEvent ae) -> save()));
@@ -60,7 +60,12 @@ public class main extends Application {
         myMenu.getMenus().addAll(editMenu, helpMenu);
         root.getChildren().add(myMenu);
 
-
+        Button myButton = new Button("Add");
+        myButton.setPrefSize(70, 10);
+        myButton.setLayoutX(480);
+        myButton.setLayoutY(50);
+        myButton.setOnAction((ActionEvent ae) -> openStageFour(root));
+        root.getChildren().add(myButton);
 
         TableView<ITEMSView> table = new TableView<>();
         table.setPrefSize(500, 200);
@@ -113,6 +118,10 @@ public class main extends Application {
 
     public static void openStageThree(Pane pane) {
         StageThree newStageThree = new StageThree(pane);
+    }
+
+    public static void openStageFour(Pane pane) {
+        StageFour newStageFour = new StageFour(pane);
     }
 
     public static void save() {
