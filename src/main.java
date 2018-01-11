@@ -120,8 +120,7 @@ public class main extends Application {
         StageThree newStageThree = new StageThree(pane);
     }
 
-    public static void openStageFour(Pane pane) {
-        StageFour newStageFour = new StageFour(pane);
+    public static void openStageFour(Pane pane) { StageFour newStageFour = new StageFour(pane);
     }
 
     public static void save() {
